@@ -1,18 +1,5 @@
 defmodule Tiapi do
   @moduledoc """
-  Documentation for `Tiapi`.
+  SDK для T-Invest API
   """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Tiapi.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end

@@ -1,9 +1,9 @@
-defmodule Tiapi.MixProject do
+defmodule Client.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :tiapi,
+      app: :client,
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
@@ -14,6 +14,7 @@ defmodule Tiapi.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {Client.Application, []},
       extra_applications: [:logger]
     ]
   end
@@ -21,10 +22,7 @@ defmodule Tiapi.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:protobuf, "~> 0.13"},
-      {:google_protos, "~> 0.4"},
-      {:grpc, "~> 0.9"},
-      {:castore, "~> 0.1 or ~> 1.0"},
+      {:tiapi, path: "../../"},
     ]
   end
 end
