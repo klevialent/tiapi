@@ -15,7 +15,7 @@ defmodule Tiapi.Channel do
     {:ok, channel} = GRPC.Stub.connect(
       get_value(opts, :api_url),
       [
-        interceptors: [GRPC.Client.Interceptors.Logger],
+        # interceptors: [GRPC.Client.Interceptors.Logger],
         headers: [{"Authorization", "Bearer #{get_value(opts, :token)}"}],
         cred: %GRPC.Credential{
           ssl: [
@@ -37,7 +37,7 @@ defmodule Tiapi.Channel do
     {:ok, channel} = GRPC.Stub.connect(
       get_value(opts, :api_url),
       [
-        interceptors: [GRPC.Client.Interceptors.Logger],
+        # interceptors: [GRPC.Client.Interceptors.Logger],
         headers: [{"Authorization", "Bearer #{get_value(opts, :token)}"}],
         cred: %GRPC.Credential{
           ssl: [
