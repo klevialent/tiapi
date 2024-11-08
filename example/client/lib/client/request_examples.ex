@@ -14,4 +14,3 @@ defmodule Client.RequestExamples do
   end
 
 end
-1
