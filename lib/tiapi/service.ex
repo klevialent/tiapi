@@ -1,6 +1,7 @@
 defmodule Tiapi.Service do
   alias Tiapi.RequestsMap
   alias Tiapi.Channel
+  alias Google.Protobuf.Timestamp
 
   @account_id Application.compile_env(:tiapi, :account_id)
 
@@ -45,4 +46,37 @@ defmodule Tiapi.Service do
     request!(request)
   end
 
+  @spec get_var_margin_operations!(DateTime.t(), DateTime.t()) :: Tiapi.Proto.GetOperationsByCursorResponse.t()
+  @spec get_var_margin_operations!(DateTime.t(), DateTime.t(), any()) :: Tiapi.Proto.GetOperationsByCursorResponse.t()
+  def get_var_margin_operations!(from, to, account_id \\ @account_id) do
+    request = %Tiapi.Proto.GetOperationsByCursorRequest{
+      account_id: account_id,
+      operation_types: [
+        :OPERATION_TYPE_ACCRUING_VARMARGIN,
+        :OPERATION_TYPE_WRITING_OFF_VARMARGIN,
+      ],
+      from: %Timestamp{seconds: DateTime.to_unix(from)},
+      to: %Timestamp{seconds: DateTime.to_unix(to)},
+    }
+
+    request!(request)
+  end
+
+  @spec get_trade_operations!(String.t(), DateTime.t(), DateTime.t()) :: Tiapi.Proto.GetOperationsByCursorResponse.t()
+  @spec get_trade_operations!(String.t(), DateTime.t(), DateTime.t(), any()) :: Tiapi.Proto.GetOperationsByCursorResponse.t()
+  def get_trade_operations!(instrument_uid, from, to, account_id \\ @account_id) do
+    request = %Tiapi.Proto.GetOperationsByCursorRequest{
+      account_id: account_id,
+      instrument_id: instrument_uid,
+      operation_types: [
+        :OPERATION_TYPE_BUY,
+        :OPERATION_TYPE_SELL,
+      ],
+      state: :OPERATION_STATE_EXECUTED,
+      from: %Timestamp{seconds: DateTime.to_unix(from)},
+      to: %Timestamp{seconds: DateTime.to_unix(to)},
+    }
+
+    request!(request)
+  end
 end

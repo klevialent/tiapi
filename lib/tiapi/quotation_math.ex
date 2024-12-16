@@ -26,6 +26,8 @@ defmodule Tiapi.QuotationMath do
   @spec sum([Quotation.t() | Money.t()]) :: Quotation.t()
   def sum([last_q]), do: last_q
   def sum([first_q | rest]), do: sum(first_q, sum(rest))
+  def sum([]), do: %Quotation{}
+
 
   @spec sub(Quotation.t() | Money.t(), Quotation.t() | Money.t()) :: Quotation.t()
   def sub(q1, q2) do
