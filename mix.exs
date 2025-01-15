@@ -25,6 +25,7 @@ defmodule Tiapi.MixProject do
       {:google_protos, "~> 0.4"},
       {:grpc, "~> 0.9"},
       {:castore, "~> 0.1 or ~> 1.0"},
+      {:ecto, "~> 3.12", only: [:dev, :test]},
     ]
   end
 end
