@@ -1,5 +1,5 @@
 defmodule Tiapi.QuotationMathTest do
-  alias Tiapi.Proto.Quotation
+  alias Tiapi.Type.Quotation
   import Tiapi.QuotationMath
   use ExUnit.Case
 
@@ -72,28 +72,28 @@ defmodule Tiapi.QuotationMathTest do
      assert sub(q1, q2) |> normalize() == %Quotation{units: 2, nano: 22}
    end
 
-   test "substraction equals" do
+   test "subtraction equals" do
      q1 = %Quotation{units: 3, nano: 3}
      q2 = %Quotation{units: 3, nano: 3}
 
      assert sub(q1, q2) |> normalize() == %Quotation{}
    end
 
-   test "substraction greater from lesser" do
+   test "subtraction greater from lesser" do
      q1 = %Quotation{units: 3, nano: 3}
      q2 = %Quotation{units: 5, nano: 1}
 
      assert sub(q1, q2) |> normalize() == %Quotation{units: -1, nano: -999_999_998}
    end
 
-   test "substraction quotation with greater nano" do
+   test "subtraction quotation with greater nano" do
      q1 = %Quotation{units: 4, nano: 1}
      q2 = %Quotation{units: 2, nano: 3}
 
      assert sub(q1, q2) |> normalize() == %Quotation{units: 1, nano: 999_999_998}
    end
 
-   test "substraction not normalized" do
+   test "subtraction not normalized" do
      q1 = %Quotation{units: 2, nano: -11}
      q2 = %Quotation{units: 5, nano: -15_000_000_017}
 
