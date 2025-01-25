@@ -90,9 +90,10 @@ defmodule Tiapi.Channel do
   end
 
   @impl true
-  def handle_info({:elixir_grpc, :connection_down, _pid}, state) do
-    {:noreply, %{state | status: :down}}
-  end
+  def handle_info({:elixir_grpc, :connection_down, _pid}, state), do: set_down(state)
+  def handle_info({:EXIT, _pid, _}, state), do: set_down(state)
+
+  defp set_down(state), do: {:noreply, %{state | status: :down}}
 
   defp get_value(values, key) do
     Keyword.get(values, key, Application.get_env(:tiapi, key))
